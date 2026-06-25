@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DiscordForge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">DF</div>
+          <div>
+            <strong>DiscordForge</strong>
+            <span>Server builder</span>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#build" class="active">Build</a>
+          <a href="#blueprints">Blueprints</a>
+          <a href="#settings">Settings</a>
+          <a href="#setup">Setup</a>
+          <a href="#docs">Docs</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="dot"></span>
+          Official Discord bot API only. No self-bots.
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <h1>Build a Discord server from one prompt</h1>
+            <p>Generate, inspect, dry-run, and provision a reusable Discord server blueprint.</p>
+          </div>
+          <div id="statusChips" class="status-chips"></div>
+        </header>
+
+        <section class="grid">
+          <div class="panel prompt-panel" id="build">
+            <div class="panel-header">
+              <div>
+                <h2>Describe the server</h2>
+                <p>Use plain English. Include audience, access tiers, support needs, channels, and tone.</p>
+              </div>
+              <button id="refreshStatus" class="icon-button" title="Refresh status" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-14.2 5M4 12A8 8 0 0 1 18.2 7M18 3v4h-4M6 21v-4h4"/></svg>
+              </button>
+            </div>
+
+            <textarea id="promptInput" spellcheck="true">Create a professional Discord server for a SaaS startup with free users, premium users, support, announcements, and staff moderation.</textarea>
+
+            <div class="control-row">
+              <div class="segmented" role="group" aria-label="AI provider">
+                <button class="selected" data-provider="ollama" type="button">Ollama</button>
+                <button data-provider="openai" type="button">OpenAI</button>
+                <button data-provider="local" type="button">Local</button>
+                <button data-provider="auto" type="button">Auto</button>
+              </div>
+              <input id="outputName" class="name-input" placeholder="optional output name" />
+            </div>
+
+            <div class="actions">
+              <button id="generateBtn" class="primary" type="button">Generate Blueprint</button>
+              <button id="validateBtn" type="button">Validate</button>
+              <button id="dryRunBtn" type="button">Dry Run</button>
+              <button id="applyBtn" class="danger" type="button">Apply to Discord</button>
+            </div>
+
+            <div class="checklist" id="setup">
+              <h3>Setup checklist</h3>
+              <ul>
+                <li><span id="checkToken" class="check"></span> Discord bot token configured</li>
+                <li><span id="checkGuild" class="check"></span> Discord guild ID configured</li>
+                <li><span id="checkProvider" class="check"></span> AI provider available or local fallback selected</li>
+                <li><span id="checkBlueprint" class="check"></span> Blueprint generated and validated</li>
+              </ul>
+            </div>
+
+            <form class="settings-form" id="settings">
+              <div class="panel-header compact">
+                <div>
+                  <h3>Environment settings</h3>
+                  <p>Saved to `.env`. Existing secrets stay unchanged when left blank.</p>
+                </div>
+                <button id="saveEnvBtn" type="submit">Save</button>
+              </div>
+
+              <div class="settings-grid">
+                <label>
+                  Discord bot token
+                  <input id="envDiscordToken" type="password" autocomplete="off" placeholder="Leave blank to keep current token" />
+                </label>
+                <label>
+                  Discord guild ID
+                  <input id="envGuildId" autocomplete="off" placeholder="Server ID" />
+                </label>
+                <label>
+                  AI provider
+                  <select id="envAiProvider">
+                    <option value="ollama">Ollama</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="local">Local</option>
+                    <option value="auto">Auto</option>
+                  </select>
+                </label>
+                <label>
+                  OpenAI API key
+                  <input id="envOpenAiKey" type="password" autocomplete="off" placeholder="Leave blank to keep current key" />
+                </label>
+                <label>
+                  OpenAI model
+                  <input id="envOpenAiModel" autocomplete="off" />
+                </label>
+                <label>
+                  Ollama URL
+                  <input id="envOllamaUrl" autocomplete="off" />
+                </label>
+                <label>
+                  Ollama model
+                  <input id="envOllamaModel" autocomplete="off" />
+                </label>
+                <label>
+                  Ollama timeout
+                  <input id="envOllamaTimeout" inputmode="numeric" autocomplete="off" />
+                </label>
+                <label>
+                  Log level
+                  <select id="envLogLevel">
+                    <option value="debug">debug</option>
+                    <option value="info">info</option>
+                    <option value="warn">warn</option>
+                    <option value="error">error</option>
+                    <option value="silent">silent</option>
+                  </select>
+                </label>
+                <label>
+                  Dry run default
+                  <select id="envDryRun">
+                    <option value="false">false</option>
+                    <option value="true">true</option>
+                  </select>
+                </label>
+                <label>
+                  State file
+                  <input id="envStateFile" autocomplete="off" />
+                </label>
+                <label>
+                  Web host
+                  <input id="envWebHost" autocomplete="off" />
+                </label>
+                <label>
+                  Web port
+                  <input id="envWebPort" inputmode="numeric" autocomplete="off" />
+                </label>
+              </div>
+
+              <p class="settings-note" id="settingsNote">Token and API key values are write-only from this screen.</p>
+            </form>
+
+            <div class="blueprint-picker" id="blueprints">
+              <div class="panel-header compact">
+                <h3>Blueprints</h3>
+                <button id="loadSelected" type="button">Load</button>
+              </div>
+              <select id="blueprintSelect"></select>
+              <div class="template-row">
+                <input id="templateName" class="name-input" placeholder="template name" />
+                <button id="saveTemplateBtn" type="button">Save Template</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel preview-panel">
+            <div class="tabs" role="tablist">
+              <button class="selected" data-tab="preview" type="button">Preview</button>
+              <button data-tab="yaml" type="button">YAML</button>
+              <button data-tab="log" type="button">Run Log</button>
+            </div>
+
+            <section id="previewTab" class="tab-page active">
+              <div id="summaryCards" class="summary-cards"></div>
+              <div class="tree-wrap">
+                <div class="panel-header compact">
+                  <h3>Server structure</h3>
+                  <span id="currentPath" class="muted"></span>
+                </div>
+                <div id="tree" class="tree empty">Generate or load a blueprint to preview its structure.</div>
+              </div>
+            </section>
+
+            <section id="yamlTab" class="tab-page">
+              <div class="editor-toolbar">
+                <span>Edit YAML, then validate or save.</span>
+                <div class="toolbar-actions">
+                  <button id="saveBtn" type="button">Save Blueprint</button>
+                  <button id="saveTemplateToolbarBtn" type="button">Save Template</button>
+                </div>
+              </div>
+              <textarea id="yamlEditor" class="yaml-editor" spellcheck="false"></textarea>
+            </section>
+
+            <section id="logTab" class="tab-page">
+              <pre id="runLog" class="run-log">Ready.</pre>
+            </section>
+          </div>
+        </section>
+
+        <section class="docs-strip" id="docs">
+          <div>
+            <h2>Open-source ready</h2>
+            <p>Ship with `.env.example`, example blueprints, local Ollama support, dry-run safety, and idempotent state tracking.</p>
+          </div>
+          <div class="doc-links">
+            <a href="/api/status" target="_blank" rel="noreferrer">Status JSON</a>
+            <a href="https://github.com/MichaelMattern/PromptGuild/blob/main/docs/discord-bot-setup.md" target="_blank" rel="noreferrer">Bot Setup</a>
+            <a href="https://discord.com/developers/applications" target="_blank" rel="noreferrer">Discord Developer Portal</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

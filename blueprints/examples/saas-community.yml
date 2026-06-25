@@ -1,0 +1,232 @@
+server:
+  name: SaaS Product Community
+  description: Support and community server for a SaaS product.
+  preferredTone: professional
+  communityType: SaaS/product community
+  defaultLocale: en-US
+roles:
+  - name: Owner
+    color: "#FEE75C"
+    hoist: true
+    mentionable: false
+    permissions: [Administrator]
+    position: 9
+    managedByBot: true
+  - name: Admin
+    color: "#ED4245"
+    hoist: true
+    mentionable: false
+    permissions: [ManageGuild, ManageRoles, ManageChannels, ManageMessages, ManageWebhooks]
+    position: 8
+    managedByBot: true
+  - name: Moderator
+    color: "#EB459E"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages, ModerateMembers, KickMembers, BanMembers]
+    position: 7
+    managedByBot: true
+  - name: Staff
+    color: "#5865F2"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages]
+    position: 6
+    managedByBot: true
+  - name: Premium Member
+    color: "#F1C40F"
+    hoist: false
+    mentionable: true
+    permissions: []
+    position: 5
+    managedByBot: true
+  - name: Verified Member
+    color: "#57F287"
+    hoist: false
+    mentionable: false
+    permissions: []
+    position: 4
+    managedByBot: true
+  - name: Member
+    color: "#99AAB5"
+    hoist: false
+    mentionable: false
+    permissions: []
+    position: 3
+    managedByBot: true
+  - name: Muted
+    color: "#2F3136"
+    hoist: false
+    mentionable: false
+    permissions: []
+    position: 1
+    managedByBot: true
+categories:
+  - name: START HERE
+    description: Onboarding and rules.
+    permissions:
+      - role: "@everyone"
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: []
+    channels:
+      - name: welcome
+        type: text
+        topic: Start here.
+        permissions:
+          - role: "@everyone"
+            allow: [ViewChannel, ReadMessageHistory]
+            deny: [SendMessages]
+        starterMessages:
+          - title: Welcome
+            body: Welcome to the product community. Read the rules, verify, and use support channels for help.
+            pin: true
+      - name: rules
+        type: text
+        topic: Server rules.
+        starterMessages:
+          - title: Server Rules
+            body: |-
+              1. Be respectful.
+              2. No harassment, hate speech, threats, or spam.
+              3. No impersonation.
+              4. No illegal content.
+              5. No sharing private information.
+              6. Keep conversations in the correct channels.
+              7. Follow staff instructions.
+              8. Violations may lead to warnings, mutes, kicks, or bans.
+            pin: true
+      - name: verify
+        type: text
+        topic: Verification instructions.
+  - name: ANNOUNCEMENTS
+    description: Official product updates.
+    permissions:
+      - role: "@everyone"
+        allow: []
+        deny: [ViewChannel]
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: [SendMessages]
+    channels:
+      - name: announcements
+        type: announcement
+        topic: Official announcements.
+      - name: updates
+        type: text
+        topic: Operational updates.
+      - name: changelog
+        type: announcement
+        topic: Product releases and fixes.
+  - name: COMMUNITY
+    description: Product community discussion.
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: general
+        type: text
+        topic: General discussion.
+      - name: introductions
+        type: text
+        topic: Introduce yourself.
+      - name: questions
+        type: text
+        topic: Community questions.
+  - name: SUPPORT
+    description: Support, bugs, and requests.
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: support
+        type: text
+        topic: Customer support.
+        starterMessages:
+          - title: Support
+            body: Post your question with clear detail. Never share credentials, API keys, billing details, or private information.
+            pin: true
+      - name: bug-reports
+        type: text
+        topic: Reproducible bugs.
+      - name: feature-requests
+        type: text
+        topic: Product ideas.
+  - name: PREMIUM
+    description: Paid customer channels.
+    permissions:
+      - role: "@everyone"
+        allow: []
+        deny: [ViewChannel]
+      - role: Premium Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: premium-info
+        type: text
+        topic: Premium access details.
+      - name: premium-chat
+        type: text
+        topic: Paid customer discussion.
+  - name: STAFF
+    description: Staff-only operations.
+    permissions:
+      - role: "@everyone"
+        allow: []
+        deny: [ViewChannel]
+      - role: Staff
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+      - role: Moderator
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageMessages]
+        deny: []
+      - role: Admin
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageChannels]
+        deny: []
+    channels:
+      - name: staff-chat
+        type: text
+        topic: Staff discussion.
+      - name: moderation-log
+        type: text
+        topic: Moderation log.
+      - name: admin-notes
+        type: text
+        topic: Admin notes.
+automod:
+  enabled: true
+  rules:
+    - name: Block invite links
+      type: invite_links
+      keywords: ["discord.gg/*", "discord.com/invite/*"]
+      action: block
+      exemptRoles: [Owner, Admin, Moderator, Staff]
+      logChannel: moderation-log
+    - name: Block mass mentions
+      type: mass_mentions
+      keywords: []
+      action: block
+      exemptRoles: [Owner, Admin, Moderator, Staff]
+      logChannel: moderation-log
+onboarding:
+  enabled: true
+  welcomeMessage: Welcome to the product community.
+  questions:
+    - title: How will you use this server?
+      type: multi_select
+      options:
+        - label: Product User
+          role: Verified Member
+          channels: [general, support, changelog]
+        - label: Premium Customer
+          role: Premium Member
+          channels: [premium-chat, premium-info]
+features:
+  starterMessages: true
+  webhooks: false
+  automod: true
+  onboarding: true
+  supportTickets: true
+  premiumRoles: true
+  announcementChannels: true

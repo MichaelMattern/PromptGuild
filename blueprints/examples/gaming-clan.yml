@@ -1,0 +1,216 @@
+server:
+  name: Gaming Clan Community
+  description: Server for ranks, LFG, tournaments, and staff moderation.
+  preferredTone: friendly and organized
+  communityType: Gaming community
+  defaultLocale: en-US
+roles:
+  - name: Owner
+    color: "#FEE75C"
+    hoist: true
+    mentionable: false
+    permissions: [Administrator]
+    managedByBot: true
+  - name: Admin
+    color: "#ED4245"
+    hoist: true
+    mentionable: false
+    permissions: [ManageGuild, ManageRoles, ManageChannels, ManageMessages]
+    managedByBot: true
+  - name: Moderator
+    color: "#EB459E"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages, ModerateMembers, KickMembers, BanMembers]
+    managedByBot: true
+  - name: Staff
+    color: "#5865F2"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages]
+    managedByBot: true
+  - name: Team Captain
+    color: "#E67E22"
+    hoist: true
+    mentionable: true
+    permissions: []
+    managedByBot: true
+  - name: Looking For Group
+    color: "#1ABC9C"
+    hoist: false
+    mentionable: true
+    permissions: []
+    managedByBot: true
+  - name: Event Participant
+    color: "#FEE75C"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Verified Member
+    color: "#57F287"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Member
+    color: "#99AAB5"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Muted
+    color: "#2F3136"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+categories:
+  - name: START HERE
+    permissions:
+      - role: "@everyone"
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: []
+    channels:
+      - name: welcome
+        type: text
+        topic: Welcome and overview.
+      - name: rules
+        type: text
+        topic: Server rules.
+        starterMessages:
+          - title: Server Rules
+            body: |-
+              1. Be respectful.
+              2. No harassment, hate speech, threats, or spam.
+              3. No impersonation.
+              4. No illegal content.
+              5. No sharing private information.
+              6. Keep conversations in the correct channels.
+              7. Follow staff instructions.
+              8. Violations may lead to warnings, mutes, kicks, or bans.
+            pin: true
+      - name: verify
+        type: text
+        topic: Verification instructions.
+  - name: ANNOUNCEMENTS
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: [SendMessages]
+    channels:
+      - name: announcements
+        type: announcement
+        topic: Clan announcements.
+      - name: updates
+        type: text
+        topic: Match and roster updates.
+  - name: COMMUNITY
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: general
+        type: text
+        topic: General clan chat.
+      - name: introductions
+        type: text
+        topic: Player introductions.
+      - name: questions
+        type: text
+        topic: Ask gameplay and server questions.
+  - name: LFG
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: looking-for-group
+        type: text
+        topic: Find a squad.
+      - name: lfg-voice
+        type: voice
+        topic: LFG voice room.
+  - name: TOURNAMENTS
+    permissions:
+      - role: Verified Member
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: tournament-announcements
+        type: announcement
+        topic: Tournament notices.
+      - name: tournament-chat
+        type: text
+        topic: Tournament discussion.
+      - name: team-captains
+        type: text
+        topic: Captain coordination.
+        permissions:
+          - role: "@everyone"
+            allow: []
+            deny: [ViewChannel]
+          - role: Team Captain
+            allow: [ViewChannel, ReadMessageHistory, SendMessages]
+            deny: []
+  - name: STAFF
+    permissions:
+      - role: "@everyone"
+        allow: []
+        deny: [ViewChannel]
+      - role: Staff
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+      - role: Moderator
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageMessages]
+        deny: []
+      - role: Admin
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageChannels]
+        deny: []
+    channels:
+      - name: staff-chat
+        type: text
+        topic: Staff chat.
+      - name: moderation-log
+        type: text
+        topic: Moderation log.
+      - name: admin-notes
+        type: text
+        topic: Admin notes.
+automod:
+  enabled: true
+  rules:
+    - name: Block invite links
+      type: invite_links
+      keywords: ["discord.gg/*", "discord.com/invite/*"]
+      action: block
+      exemptRoles: [Owner, Admin, Moderator, Staff]
+      logChannel: moderation-log
+    - name: Block mass mentions
+      type: mass_mentions
+      keywords: []
+      action: block
+      exemptRoles: [Owner, Admin, Moderator, Staff]
+      logChannel: moderation-log
+onboarding:
+  enabled: true
+  welcomeMessage: Welcome to the clan.
+  questions:
+    - title: What are you here for?
+      type: multi_select
+      options:
+        - label: Looking For Group
+          role: Looking For Group
+          channels: [looking-for-group, lfg-voice]
+        - label: Tournament Player
+          role: Event Participant
+          channels: [tournament-announcements, tournament-chat]
+features:
+  starterMessages: true
+  webhooks: false
+  automod: true
+  onboarding: true
+  supportTickets: false
+  premiumRoles: false
+  announcementChannels: true

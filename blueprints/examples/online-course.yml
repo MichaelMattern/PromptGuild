@@ -1,0 +1,218 @@
+server:
+  name: Online Course Community
+  description: Course server with students, instructors, assignments, office hours, and announcements.
+  preferredTone: professional
+  communityType: Education/course community
+  defaultLocale: en-US
+roles:
+  - name: Owner
+    color: "#FEE75C"
+    hoist: true
+    mentionable: false
+    permissions: [Administrator]
+    managedByBot: true
+  - name: Admin
+    color: "#ED4245"
+    hoist: true
+    mentionable: false
+    permissions: [ManageGuild, ManageRoles, ManageChannels, ManageMessages]
+    managedByBot: true
+  - name: Moderator
+    color: "#EB459E"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages, ModerateMembers]
+    managedByBot: true
+  - name: Staff
+    color: "#5865F2"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages]
+    managedByBot: true
+  - name: Instructor
+    color: "#9B59B6"
+    hoist: true
+    mentionable: true
+    permissions: [ManageMessages]
+    managedByBot: true
+  - name: Teaching Assistant
+    color: "#3498DB"
+    hoist: true
+    mentionable: false
+    permissions: [ManageMessages]
+    managedByBot: true
+  - name: Student
+    color: "#57F287"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Verified Member
+    color: "#57F287"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Member
+    color: "#99AAB5"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+  - name: Muted
+    color: "#2F3136"
+    hoist: false
+    mentionable: false
+    permissions: []
+    managedByBot: true
+categories:
+  - name: START HERE
+    permissions:
+      - role: "@everyone"
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: []
+    channels:
+      - name: welcome
+        type: text
+        topic: Welcome and overview.
+      - name: rules
+        type: text
+        topic: Server rules.
+        starterMessages:
+          - title: Server Rules
+            body: |-
+              1. Be respectful.
+              2. No harassment, hate speech, threats, or spam.
+              3. No impersonation.
+              4. No illegal content.
+              5. No sharing private information.
+              6. Keep conversations in the correct channels.
+              7. Follow staff instructions.
+              8. Violations may lead to warnings, mutes, kicks, or bans.
+            pin: true
+      - name: how-to-use-this-server
+        type: text
+        topic: Course server guide.
+      - name: verify
+        type: text
+        topic: Verification instructions.
+  - name: ANNOUNCEMENTS
+    permissions:
+      - role: Student
+        allow: [ViewChannel, ReadMessageHistory]
+        deny: [SendMessages]
+    channels:
+      - name: announcements
+        type: announcement
+        topic: Course announcements.
+      - name: updates
+        type: text
+        topic: Schedule updates.
+  - name: COURSE CONTENT
+    permissions:
+      - role: Student
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: lesson-announcements
+        type: announcement
+        topic: Lesson releases.
+      - name: lesson-discussion
+        type: text
+        topic: Lesson discussion.
+      - name: study-resources
+        type: text
+        topic: Study resources.
+  - name: ASSIGNMENTS
+    permissions:
+      - role: Student
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: assignments
+        type: text
+        topic: Assignment prompts.
+      - name: assignment-help
+        type: text
+        topic: Assignment help.
+  - name: OFFICE HOURS
+    permissions:
+      - role: Student
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, Connect, Speak]
+        deny: []
+    channels:
+      - name: office-hours
+        type: text
+        topic: Office hours schedule.
+      - name: office-hours-voice
+        type: voice
+        topic: Live office hours.
+  - name: SUPPORT
+    permissions:
+      - role: Student
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+    channels:
+      - name: support
+        type: text
+        topic: Course support.
+      - name: questions
+        type: text
+        topic: Student questions.
+  - name: STAFF
+    permissions:
+      - role: "@everyone"
+        allow: []
+        deny: [ViewChannel]
+      - role: Instructor
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageMessages]
+        deny: []
+      - role: Teaching Assistant
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageMessages]
+        deny: []
+      - role: Staff
+        allow: [ViewChannel, ReadMessageHistory, SendMessages]
+        deny: []
+      - role: Admin
+        allow: [ViewChannel, ReadMessageHistory, SendMessages, ManageChannels]
+        deny: []
+    channels:
+      - name: staff-chat
+        type: text
+        topic: Staff discussion.
+      - name: moderation-log
+        type: text
+        topic: Moderation log.
+      - name: admin-notes
+        type: text
+        topic: Admin notes.
+automod:
+  enabled: true
+  rules:
+    - name: Block invite links
+      type: invite_links
+      keywords: ["discord.gg/*", "discord.com/invite/*"]
+      action: block
+      exemptRoles: [Owner, Admin, Moderator, Staff, Instructor, Teaching Assistant]
+      logChannel: moderation-log
+onboarding:
+  enabled: true
+  welcomeMessage: Welcome to the course.
+  questions:
+    - title: What is your role?
+      type: single_select
+      options:
+        - label: Student
+          role: Student
+          channels: [lesson-discussion, assignments, office-hours]
+        - label: Teaching Team
+          role: Teaching Assistant
+          channels: [staff-chat, lesson-discussion]
+features:
+  starterMessages: true
+  webhooks: false
+  automod: true
+  onboarding: true
+  supportTickets: false
+  premiumRoles: false
+  announcementChannels: true
