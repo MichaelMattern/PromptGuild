@@ -63,7 +63,7 @@ function createChannelPayload(guild: Guild, channelBlueprint: ChannelBlueprint, 
     type,
     parent: parentId,
     permissionOverwrites: overwrites,
-    reason: "DiscordForge server setup"
+    reason: "PromptGuild server setup"
   };
 
   if (type !== ChannelType.GuildVoice) {
@@ -81,7 +81,7 @@ function editChannelPayload(guild: Guild, channelBlueprint: ChannelBlueprint, pa
     name: channelBlueprint.name,
     parent: parentId,
     permissionOverwrites: overwrites,
-    reason: "DiscordForge server setup"
+    reason: "PromptGuild server setup"
   };
 
   if (type !== ChannelType.GuildVoice) {
@@ -116,7 +116,7 @@ async function ensureCategory(
         name: categoryBlueprint.name,
         type: ChannelType.GuildCategory,
         permissionOverwrites: overwrites,
-        reason: "DiscordForge server setup"
+        reason: "PromptGuild server setup"
       });
 
       logger.info(`Created category: ${categoryBlueprint.name}`);
@@ -139,7 +139,7 @@ async function ensureCategory(
     await existing.edit({
       name: categoryBlueprint.name,
       permissionOverwrites: overwrites,
-      reason: "DiscordForge server setup"
+      reason: "PromptGuild server setup"
     });
     logger.info(`Updated category: ${categoryBlueprint.name}`);
     summary.updatedCategories += 1;

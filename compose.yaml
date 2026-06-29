@@ -1,22 +1,24 @@
+name: promptguild
+
 services:
-  discordforge:
+  promptguild:
     build:
       context: .
-    image: discordforge:latest
-    container_name: discordforge
+    image: promptguild:latest
+    container_name: promptguild
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${DISCORDFORGE_PORT:-5194}:5194"
+      - "127.0.0.1:${PROMPTGUILD_PORT:-5194}:5194"
     environment:
       ENV_FILE: /data/.env
     volumes:
-      - discordforge-data:/data
-      - discordforge-generated:/app/blueprints/generated
-      - discordforge-templates:/app/blueprints/templates
+      - promptguild-data:/data
+      - promptguild-generated:/app/blueprints/generated
+      - promptguild-templates:/app/blueprints/templates
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
 volumes:
-  discordforge-data:
-  discordforge-generated:
-  discordforge-templates:
+  promptguild-data:
+  promptguild-generated:
+  promptguild-templates:

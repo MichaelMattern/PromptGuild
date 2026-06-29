@@ -1,0 +1,62 @@
+name: Feature request
+description: Suggest an improvement to PromptGuild.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for product, CLI, UI, provider, provisioning, or blueprint format improvements.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user need would this solve?
+      placeholder: It is hard to review permission overwrites because...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior you want.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CLI
+        - Web UI
+        - Discord provisioning
+        - Blueprint generation
+        - Blueprint validation
+        - AI providers
+        - Docker/self-hosting
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Example use cases
+      description: Who benefits, and what would they do with it?
+  - type: textarea
+    id: blueprint_impact
+    attributes:
+      label: Blueprint impact
+      description: Would this require a new blueprint field, validation rule, or example?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I may be interested in contributing this.
+          required: false

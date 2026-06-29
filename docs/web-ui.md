@@ -1,6 +1,6 @@
 # Web UI
 
-DiscordForge includes a local web UI for non-technical setup and review.
+PromptGuild includes a local web UI for non-technical setup and review.
 
 Start it:
 

@@ -89,7 +89,7 @@ async function ensureStarterMessage(
       }
 
       if (starter.pin && !existing.pinned) {
-        await existing.pin("DiscordForge starter message").catch((error) => logger.warn(`Could not pin message ${starter.title}`, error));
+        await existing.pin("PromptGuild starter message").catch((error) => logger.warn(`Could not pin message ${starter.title}`, error));
       }
 
       await stateManager.setMessage(key, {
@@ -109,7 +109,7 @@ async function ensureStarterMessage(
 
     const sent = await textChannel.send(content);
     if (starter.pin) {
-      await sent.pin("DiscordForge starter message").catch((error) => logger.warn(`Could not pin message ${starter.title}`, error));
+      await sent.pin("PromptGuild starter message").catch((error) => logger.warn(`Could not pin message ${starter.title}`, error));
     }
 
     logger.info(`Posted starter message: ${channelBlueprint.name} / ${starter.title}`);

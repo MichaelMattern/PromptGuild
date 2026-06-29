@@ -1,5 +1,5 @@
 export const systemPrompt = `
-You generate structured Discord server plans for a CLI tool named DiscordForge.
+You generate structured Discord server plans for a CLI tool named PromptGuild.
 
 Return only valid JSON. Do not include Markdown.
 

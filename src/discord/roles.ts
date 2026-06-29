@@ -57,7 +57,7 @@ export async function ensureRoles(
           hoist: blueprint.hoist,
           mentionable: blueprint.mentionable,
           permissions: permissionsValue(blueprint.permissions),
-          reason: "DiscordForge server setup"
+          reason: "PromptGuild server setup"
         });
 
         logger.info(`Created role: ${blueprint.name}`);
@@ -76,7 +76,7 @@ export async function ensureRoles(
           hoist: blueprint.hoist,
           mentionable: blueprint.mentionable,
           permissions: permissionsValue(blueprint.permissions),
-          reason: "DiscordForge server setup"
+          reason: "PromptGuild server setup"
         });
         logger.info(`Updated role: ${blueprint.name}`);
         summary.updatedRoles += 1;
@@ -104,7 +104,7 @@ export async function ensureRoles(
     }
 
     try {
-      await role.setPosition(blueprint.position, { reason: "DiscordForge role hierarchy" });
+      await role.setPosition(blueprint.position, { reason: "PromptGuild role hierarchy" });
     } catch (error) {
       logger.warn(`Could not set role position for ${blueprint.name}. Check the bot role hierarchy.`, error);
     }

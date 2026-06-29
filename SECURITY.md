@@ -13,7 +13,7 @@ For now, report security issues privately to the repository owner through GitHub
 ## Secret Handling
 
 - Never commit `.env`.
-- Never commit `.discordforge/state.json` from a live server.
+- Never commit `.promptguild/state.json` from a live server.
 - Rotate a Discord bot token immediately if it is exposed.
 - Rotate OpenAI API keys immediately if exposed.
 - Treat Discord webhook URLs as secrets because they can post to channels.
@@ -21,4 +21,4 @@ For now, report security issues privately to the repository owner through GitHub
 
 ## Bot Safety
 
-DiscordForge uses official Discord bot accounts only. Do not use normal user tokens or self-bots.
+PromptGuild uses official Discord bot accounts only. Do not use normal user tokens or self-bots.

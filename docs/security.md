@@ -1,6 +1,6 @@
 # Security
 
-DiscordForge uses official Discord bot accounts only. Do not use a self-bot or normal user token.
+PromptGuild uses official Discord bot accounts only. Do not use a self-bot or normal user token.
 
 Rules:
 

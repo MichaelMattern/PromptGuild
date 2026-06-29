@@ -93,7 +93,7 @@ async function resolveBlueprintPath(options: Record<string, string | boolean>, p
 }
 
 function printHelp(): void {
-  console.log(`DiscordForge
+  console.log(`PromptGuild
 
 Commands:
   npm run generate-blueprint -- "<prompt>"

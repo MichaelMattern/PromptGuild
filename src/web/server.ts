@@ -296,7 +296,7 @@ async function handleApi(request: IncomingMessage, response: ServerResponse, url
 
     sendJson(response, {
       ok: true,
-      app: "DiscordForge",
+      app: "PromptGuild",
       discord: {
         tokenConfigured: Boolean(env.DISCORD_TOKEN),
         guildConfigured: Boolean(env.DISCORD_GUILD_ID)
@@ -511,7 +511,7 @@ export function startWebServer(port = loadEnv().WEB_PORT, host = loadEnv().WEB_H
   });
 
   server.listen(port, host, () => {
-    console.log(`DiscordForge UI running at http://${host}:${port}`);
+    console.log(`PromptGuild UI running at http://${host}:${port}`);
   });
 }
 

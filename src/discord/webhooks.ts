@@ -46,7 +46,7 @@ async function ensureWebhook(
 
     if (existing) {
       if (existing.name !== webhook.name) {
-        await existing.edit({ name: webhook.name, reason: "DiscordForge server setup" });
+        await existing.edit({ name: webhook.name, reason: "PromptGuild server setup" });
         summary.updatedWebhooks += 1;
         logger.info(`Updated webhook: ${webhook.name}`);
       } else {
@@ -65,7 +65,7 @@ async function ensureWebhook(
 
     const created = await channel.createWebhook({
       name: webhook.name,
-      reason: webhook.purpose ?? "DiscordForge server setup"
+      reason: webhook.purpose ?? "PromptGuild server setup"
     });
 
     logger.info(`Created webhook: ${webhook.name}`);

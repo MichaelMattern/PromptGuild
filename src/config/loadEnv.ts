@@ -28,7 +28,7 @@ const envSchema = z.object({
     .default("false")
     .transform((value) => value.toLowerCase() === "true"),
   LOG_LEVEL: z.string().optional().default("info"),
-  STATE_FILE: z.string().optional().default(".discordforge/state.json"),
+  STATE_FILE: z.string().optional().default(".promptguild/state.json"),
   WEB_PORT: z
     .string()
     .optional()

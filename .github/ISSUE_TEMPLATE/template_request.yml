@@ -1,0 +1,66 @@
+name: Discord server template request
+description: Request a new reusable PromptGuild blueprint template.
+title: "[Template]: "
+labels:
+  - template
+  - help wanted
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this to request a new Discord server blueprint template that PromptGuild can generate or ship as an example.
+  - type: input
+    id: community_type
+    attributes:
+      label: Community type
+      placeholder: Creator community, gaming clan, open-source project, support server...
+    validations:
+      required: true
+  - type: textarea
+    id: audience
+    attributes:
+      label: Audience and goals
+      description: Who is the server for, and what should members be able to do?
+    validations:
+      required: true
+  - type: textarea
+    id: roles
+    attributes:
+      label: Suggested roles
+      placeholder: Staff, Moderator, Member, Premium, Guest...
+    validations:
+      required: true
+  - type: textarea
+    id: structure
+    attributes:
+      label: Suggested categories and channels
+      placeholder: Start Here, Announcements, Support, Voice, Premium...
+    validations:
+      required: true
+  - type: textarea
+    id: permissions
+    attributes:
+      label: Permission or access rules
+      description: Note private areas, premium access, staff-only channels, muted users, or moderation needs.
+  - type: textarea
+    id: starter_messages
+    attributes:
+      label: Starter messages
+      description: What welcome, rules, FAQ, disclaimer, or onboarding messages should be included?
+  - type: textarea
+    id: automod_webhooks
+    attributes:
+      label: AutoMod and webhook ideas
+      description: Include spam rules, blocked keywords, changelog webhooks, support integrations, or alerts.
+  - type: textarea
+    id: example_prompt
+    attributes:
+      label: Example prompt
+      description: Provide a natural-language prompt that should generate this template.
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I may be interested in drafting this template.
+          required: false

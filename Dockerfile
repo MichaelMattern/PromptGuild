@@ -24,10 +24,10 @@ COPY blueprints/examples ./blueprints/examples
 COPY blueprints/generated/.gitkeep ./blueprints/generated/.gitkeep
 COPY blueprints/templates/.gitkeep ./blueprints/templates/.gitkeep
 COPY README.md LICENSE CONTRIBUTING.md .env.example ./
-COPY docker-entrypoint.sh /usr/local/bin/discordforge-entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/promptguild-entrypoint
 
 RUN mkdir -p /data /app/blueprints/generated /app/blueprints/templates \
-  && chmod +x /usr/local/bin/discordforge-entrypoint \
+  && chmod +x /usr/local/bin/promptguild-entrypoint \
   && chown -R node:node /app /data
 
 USER node
@@ -37,5 +37,5 @@ VOLUME ["/data", "/app/blueprints/generated", "/app/blueprints/templates"]
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD node -e "fetch('http://127.0.0.1:' + (process.env.WEB_PORT || '5194') + '/api/status').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
 
-ENTRYPOINT ["discordforge-entrypoint"]
+ENTRYPOINT ["promptguild-entrypoint"]
 CMD ["node", "dist/web/server.js"]

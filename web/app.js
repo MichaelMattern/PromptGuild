@@ -88,7 +88,7 @@ function renderEnvSettings() {
   $("#envOllamaTimeout").value = settings.OLLAMA_TIMEOUT_MS || "30000";
   $("#envLogLevel").value = settings.LOG_LEVEL || "info";
   $("#envDryRun").value = settings.DRY_RUN || "false";
-  $("#envStateFile").value = settings.STATE_FILE || ".discordforge/state.json";
+  $("#envStateFile").value = settings.STATE_FILE || ".promptguild/state.json";
   $("#envWebHost").value = settings.WEB_HOST || "127.0.0.1";
   $("#envWebPort").value = settings.WEB_PORT || "5194";
 }

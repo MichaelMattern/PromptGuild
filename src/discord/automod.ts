@@ -82,7 +82,7 @@ export async function ensureAutomodRules(
         actions: actionsForRule(rule, logChannelId),
         exemptRoles,
         ...trigger,
-        reason: "DiscordForge server setup"
+        reason: "PromptGuild server setup"
       };
 
       if (existing) {

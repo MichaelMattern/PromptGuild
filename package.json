@@ -1,7 +1,7 @@
 {
-  "name": "discordforge",
+  "name": "promptguild",
   "version": "0.1.0",
-  "description": "Generate and provision a professional Discord server from one natural-language prompt.",
+  "description": "Turn one natural-language prompt into a Discord server blueprint, preview it, and provision it through an official bot.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MichaelMattern/PromptGuild.git"
@@ -13,8 +13,17 @@
   "keywords": [
     "discord",
     "discord-bot",
+    "discord-js",
+    "ai-agent",
+    "ai-tools",
     "server-builder",
+    "community-management",
     "ollama",
+    "openai",
+    "local-ai",
+    "automation",
+    "no-code",
+    "self-hosted",
     "open-source",
     "typescript"
   ],
@@ -30,7 +39,7 @@
     "reset-state": "tsx src/cli.ts reset-state",
     "ui": "tsx src/web/server.ts",
     "start": "node dist/web/server.js",
-    "docker:build": "docker build -t discordforge:latest .",
+    "docker:build": "docker build -t promptguild:latest .",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down"
   },

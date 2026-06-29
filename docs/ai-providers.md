@@ -1,6 +1,6 @@
 # AI Providers
 
-DiscordForge supports four prompt interpretation modes:
+PromptGuild supports four prompt interpretation modes:
 
 - `AI_PROVIDER=ollama`: use a local Ollama model and fall back to local heuristics if Ollama fails.
 - `AI_PROVIDER=openai`: use OpenAI and fall back to local heuristics if OpenAI fails.

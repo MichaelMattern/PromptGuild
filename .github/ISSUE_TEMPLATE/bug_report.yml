@@ -1,0 +1,92 @@
+name: Bug report
+description: Report a reproducible problem with PromptGuild.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Do not include Discord bot tokens, OpenAI keys, webhook URLs, or private server details.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem in a few sentences.
+      placeholder: PromptGuild generated a blueprint, but validation failed because...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CLI
+        - Web UI
+        - Discord provisioning
+        - Blueprint generation
+        - Blueprint validation
+        - Docker
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: provider
+    attributes:
+      label: AI provider mode
+      options:
+        - OpenAI
+        - Ollama/local model
+        - Auto
+        - Local deterministic
+        - Not related
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include commands, UI steps, and blueprint path when safe.
+      placeholder: |
+        1. Run `npm run ui`
+        2. Enter prompt `...`
+        3. Click Generate Blueprint
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Share OS, Node version, Docker version if relevant, and PromptGuild commit or version.
+      placeholder: |
+        OS:
+        Node:
+        Docker:
+        PromptGuild commit/version:
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Paste only redacted logs. Remove tokens, keys, webhook URLs, and private guild details.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety checklist
+      options:
+        - label: I removed bot tokens, API keys, webhook URLs, and private server details.
+          required: true

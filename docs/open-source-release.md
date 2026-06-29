@@ -3,13 +3,13 @@
 Use this checklist before publishing a fork or release.
 
 - `.env` is not committed.
-- `.discordforge/state.json` is not committed.
+- `.promptguild/state.json` is not committed.
 - Generated private blueprints are not committed unless intentionally shared.
 - User-created private templates are not committed unless intentionally shared.
 - `npm run build` passes.
 - `npm audit --omit=dev` reports no production vulnerabilities.
 - `docker compose config` validates.
-- `docker build -t discordforge:latest .` passes when Docker is running.
+- `docker build -t promptguild:latest .` passes when Docker is running.
 - Example blueprints validate.
 - README includes current setup and UI instructions.
 - `docs/discord-bot-setup.md` matches the current bot setup flow.

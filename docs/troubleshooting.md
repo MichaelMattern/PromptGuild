@@ -14,7 +14,7 @@ AutoMod may require Manage Server permissions and Community features. If setup f
 
 ## Announcement Channels Fail
 
-Announcement channels are only available in supported server configurations. DiscordForge now falls back to normal text channels when a server rejects announcement channels. Enable Community features in Discord if you specifically need announcement channels.
+Announcement channels are only available in supported server configurations. PromptGuild now falls back to normal text channels when a server rejects announcement channels. Enable Community features in Discord if you specifically need announcement channels.
 
 ## Ollama Fails
 
@@ -41,7 +41,7 @@ If the model returns invalid JSON, try a stronger model or use `AI_PROVIDER=loca
 
 ## Duplicate Resources
 
-Keep `.discordforge/state.json` between reruns. If you delete it, DiscordForge falls back to name matching, but renamed resources may be created again.
+Keep `.promptguild/state.json` between reruns. If you delete it, PromptGuild falls back to name matching, but renamed resources may be created again.
 
 ## Prompt Generation Fails
 
